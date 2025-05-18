@@ -14,7 +14,7 @@ class Master extends CI_Controller
   public function index()
   {
     // Department Data
-    $d['title'] = 'Department';
+    $d['title'] = 'Division';
     $d['department'] = $this->db->get('department')->result_array();
     $d['account'] = $this->Admin_model->getAdmin($this->session->userdata['username']);
 
@@ -26,12 +26,12 @@ class Master extends CI_Controller
   }
   public function a_dept()
   {
-    // Add Department
-    $d['title'] = 'Department';
+    // Add Division
+    $d['title'] = 'Division';
     $d['account'] = $this->Admin_model->getAdmin($this->session->userdata['username']);
     // Form Validation
-    $this->form_validation->set_rules('d_id', 'Department ID', 'required|trim|exact_length[3]|alpha');
-    $this->form_validation->set_rules('d_name', 'Department Name', 'required|trim');
+    $this->form_validation->set_rules('d_id', 'Division ID', 'required|trim|exact_length[3]|alpha');
+    $this->form_validation->set_rules('d_name', 'Division Name', 'required|trim');
 
     if ($this->form_validation->run() == false) {
       $this->load->view('templates/header', $d);
@@ -65,18 +65,18 @@ class Master extends CI_Controller
 
   public function e_dept($d_id)
   {
-    // Edit Department
-    $d['title'] = 'Department';
+    // Edit Division
+    $d['title'] = 'Division';
     $d['d_old'] = $this->db->get_where('department', ['id' => $d_id])->row_array();
     $d['account'] = $this->Admin_model->getAdmin($this->session->userdata['username']);
     // Form Validation
-    $this->form_validation->set_rules('d_name', 'Department Name', 'required|trim');
+    $this->form_validation->set_rules('d_name', 'Division Name', 'required|trim');
 
     if ($this->form_validation->run() == false) {
       $this->load->view('templates/header', $d);
       $this->load->view('templates/sidebar');
       $this->load->view('templates/topbar');
-      $this->load->view('master/department/e_dept', $d); // Edit Department Page
+      $this->load->view('master/department/e_dept', $d); // Edit Division Page
       $this->load->view('templates/footer');
     } else {
       $name = $this->input->post('d_name');
@@ -88,14 +88,14 @@ class Master extends CI_Controller
     $data = ['name' => $name];
     $this->db->update('department', $data, ['id' => $d_id]);
     $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-        Successfully edited a department!</div>');
+        Successfully edited a division!</div>');
     redirect('master');
   }
   public function d_dept($d_id)
   {
     $this->db->delete('department', ['id' => $d_id]);
     $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-        Successfully deleted a department!</div>');
+        Successfully deleted a division!</div>');
     redirect('master');
   }
   // End of department
@@ -361,7 +361,7 @@ class Master extends CI_Controller
     $this->form_validation->set_rules('e_birth_date', 'Birth Date', 'required|trim');
     $this->form_validation->set_rules('e_hire_date', 'Hire Date', 'required|trim');
     $this->form_validation->set_rules('s_id', 'Shift', 'required|trim');
-    $this->form_validation->set_rules('d_id', 'Department', 'required|trim');
+    $this->form_validation->set_rules('d_id', 'Division', 'required|trim');
 
     if ($this->form_validation->run() == false) {
       $this->load->view('templates/header', $d);

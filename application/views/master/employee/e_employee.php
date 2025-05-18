@@ -104,7 +104,7 @@
                       </div>
                       <div class="col-lg-6">
                         <div class="form-group">
-                          <label for="d_id" class="col-form-label">Department</label>
+                          <label for="d_id" class="col-form-label">Divisi</label>
                           <select class="form-control" name="d_id" id="d_id">
                             <?php foreach ($department as $dpt) : ?>
                               <option value="<?= $dpt['id'] ?>" <?php if ($dpt['id'] ==  $department_current['department_id']) {

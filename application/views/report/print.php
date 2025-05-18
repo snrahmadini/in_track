@@ -21,7 +21,7 @@
     </div>
     <div class="row mb-3">
       <div class="col-6">
-        <h1 class="h5">Department Code : <?= $dept ?></h1>
+        <h1 class="h5">Division Code : <?= $dept ?></h1>
       </div>
       <div class="col-6 text-right">
         <?php if ($start != null || $end != null) : ?>

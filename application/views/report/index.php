@@ -21,7 +21,7 @@
           </div>
           <div class="col-3">
             <select class="form-control" name="dept">
-              <option disabled>Department</option>
+              <option disabled>Division</option>
               <?php foreach ($department as $d) : ?>
                 <option value="<?= $d['id']; ?>"><?= $d['id']; ?></option>
               <?php endforeach; ?>
@@ -38,7 +38,7 @@
   </div>
   <!-- End of row show -->
   <?php if ($attendance == false) : ?>
-    <h1>No Data, Please Pick Your Date and Department</h1>
+    <h1>No Data, Please Pick Your Date and Division</h1>
   <?php else : ?>
     <?php if ($attendance != null) : ?>
       <div class="card shadow mb-4">

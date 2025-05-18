@@ -13,18 +13,18 @@
 
           <form action="" method="POST" class="col-lg-5  p-0">
             <div class="card">
-              <h5 class="card-header">Department Master Data</h5>
+              <h5 class="card-header">Division Master Data</h5>
               <div class="card-body">
-                <h5 class="card-title">Add New Department</h5>
-                <p class="card-text">Form to add new department to system</p>
+                <h5 class="card-title">Add New Division</h5>
+                <p class="card-text">Form to add new division to system</p>
                 <form>
                   <div class="form-group">
-                    <label for="d_id" class="col-form-label-lg">Department ID</label>
+                    <label for="d_id" class="col-form-label-lg">Division ID</label>
                     <input type="text" class="form-control form-control-lg" name="d_id" id="d_id">
                     <?= form_error('d_id', '<small class="text-danger">', '</small>') ?>
                   </div>
                   <div class="form-group">
-                    <label for="d_name" class="col-form-label-lg">Department Name</label>
+                    <label for="d_name" class="col-form-label-lg">Division Name</label>
                     <input type="text" class="form-control form-control-lg" name="d_name" id="d_name">
                     <?= form_error('d_name', '<small class="text-danger">', '</small>') ?>
                   </div>

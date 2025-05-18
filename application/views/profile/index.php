@@ -32,7 +32,7 @@
                   }; ?></td>
           </tr>
           <tr>
-            <th scope="row">Department</th>
+            <th scope="row">Division</th>
             <td>: <?= $account['department'] ?></td>
           </tr>
           <tr>

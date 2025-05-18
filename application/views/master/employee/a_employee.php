@@ -33,7 +33,7 @@
                       </div>
                     </div>
                     <div class="form-group row">
-                      <label for="d_id" class="col-form-label col-lg-4">Department Name</label>
+                      <label for="d_id" class="col-form-label col-lg-4">Division Name</label>
                       <div class="col p-0">
                         <select class="form-control" name="d_id" id="d_id">
                           <?php foreach ($department as $dpt) : ?>

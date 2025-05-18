@@ -10,7 +10,7 @@
                 <span class="icon text-white-600">
                   <i class="fas fa-plus-circle"></i>
                 </span>
-                <span class="text">Add New Department</span>
+                <span class="text">Add New Division</span>
               </a>
             </div>
             <div class="col-lg-5 offset-lg-4">
@@ -18,10 +18,10 @@
             </div>
           </div>
 
-          <!-- Data Table Department-->
+          <!-- Data Table Division-->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">DataTables Department</h6>
+              <h6 class="m-0 font-weight-bold text-primary">DataTables Divison</h6>
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -30,7 +30,7 @@
                     <tr>
                       <th>#</th>
                       <th>ID</th>
-                      <th>Department Name</th>
+                      <th>Division Name</th>
                       <th>Actions</th>
                     </tr>
                   </thead>
@@ -50,7 +50,7 @@
                               <i class="fas fa-edit"></i>
                             </span>
                           </a> |
-                          <a href="<?= base_url('master/d_dept/') . $dpt['id'] ?>" class="btn btn-danger btn-circle" onclick="return confirm('Deleted Department will lost forever. Still want to delete?')">
+                          <a href="<?= base_url('master/d_dept/') . $dpt['id'] ?>" class="btn btn-danger btn-circle" onclick="return confirm('Deleted Division will lost forever. Still want to delete?')">
                             <span class="icon text-white" title="Delete">
                               <i class="fas fa-trash-alt"></i>
                             </span>
