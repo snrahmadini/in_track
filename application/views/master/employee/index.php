@@ -31,7 +31,6 @@
                       <th>#</th>
                       <th>ID</th>
                       <th>Name</th>
-                      <th>Shift</th>
                       <th>Gender</th>
                       <th>Image</th>
                       <th>DOB</th>
@@ -45,14 +44,11 @@
                     $i = 1;
                     foreach ($employee as $emp) :
                     ?>
-                      <?php if ($emp['shift_id'] == 0) {
-                        continue;
-                      } ?>
+
                       <tr>
                         <td class=" align-middle"><?= $i++; ?></td>
                         <td class=" align-middle"><?= $emp['id']; ?></td>
                         <td class=" align-middle"><?= $emp['name']; ?></td>
-                        <td class=" align-middle"><?= $emp['shift_id']; ?></td>
                         <td class=" align-middle"><?php if ($emp['gender'] == 'M') {
                                                     echo 'Male';
                                                   } else {

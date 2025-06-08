@@ -14,7 +14,7 @@ class Report extends CI_Controller
   {
     $d['title'] = 'Report';
     $d['account'] = $this->Admin_model->getAdmin($this->session->userdata['username']);
-    $d['department'] = $this->db->get('department')->result_array();
+    $d['division'] = $this->db->get('division')->result_array();
     $d['start'] = $this->input->get('start');
     $d['end'] = $this->input->get('end');
     $d['dept_code'] = $this->input->get('dept');

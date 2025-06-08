@@ -33,7 +33,7 @@
           </tr>
           <tr>
             <th scope="row">Division</th>
-            <td>: <?= $account['department'] ?></td>
+            <td>: <?= $account['division'] ?></td>
           </tr>
           <tr>
             <th scope="row">Birthday</th>

@@ -72,7 +72,7 @@ INSERT INTO `attendance` (`id`, `username`, `employee_id`, `department_id`, `shi
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `department`
+-- Struktur dari tabel `division`
 --
 
 CREATE TABLE `department` (
@@ -81,7 +81,7 @@ CREATE TABLE `department` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data untuk tabel `department`
+-- Dumping data untuk tabel `division`
 --
 
 INSERT INTO `department` (`id`, `name`) VALUES
@@ -347,7 +347,7 @@ ALTER TABLE `attendance`
   ADD KEY `location_id` (`location_id`);
 
 --
--- Indeks untuk tabel `department`
+-- Indeks untuk tabel `division`
 --
 ALTER TABLE `department`
   ADD PRIMARY KEY (`id`);

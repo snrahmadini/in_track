@@ -38,7 +38,7 @@
                   <tbody>
                     <?php
                     $i = 1;
-                    foreach ($department as $dpt) :
+                    foreach ($division as $dpt) :
                     ?>
                       <tr>
                         <td class="align-middle"><?= $i++; ?></td>

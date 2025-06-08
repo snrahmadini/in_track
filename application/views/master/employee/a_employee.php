@@ -36,7 +36,7 @@
                       <label for="d_id" class="col-form-label col-lg-4">Division Name</label>
                       <div class="col p-0">
                         <select class="form-control" name="d_id" id="d_id">
-                          <?php foreach ($department as $dpt) : ?>
+                          <?php foreach ($division as $dpt) : ?>
                             <option value="<?= $dpt['id'] ?>"><?= $dpt['name']; ?></option>
                           <?php endforeach; ?>
                         </select>
@@ -74,19 +74,9 @@
                       </div>
                     </div>
                     <div class="form-group row">
-                      <label for="s_id" class="col-form-label col-lg-4">Shift</label>
-                      <div class="col p-0">
-                        <select class="form-control" name="s_id" id="s_id">
-                          <?php foreach ($shift as $sft) : ?>
-                            <option value="<?= $sft['id'] ?>"><?= $sft['id'] . ' = ' . $sft['start'] . '-' . $sft['end']; ?></option>
-                          <?php endforeach; ?>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="form-group row">
                       <label for="e_birth_date" class="col-form-label col-lg-4">Employee D.O.B</label>
                       <div class="col-lg p-0">
-                        <input type="date" class="form-control col-lg" name="e_birth_date" id="e_birth_date" min="1990-01-01" max="2002-01-01">
+                        <input type="date" class="form-control col-lg" name="e_birth_date" id="e_birth_date" min="1900-01-01" max="2010-01-01">
                         <?= form_error('e_birth_date', '<small class="text-danger">', '</small>') ?>
                       </div>
                     </div>
