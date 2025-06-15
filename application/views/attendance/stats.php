@@ -36,7 +36,6 @@
               <tr>
                 <th>#</th>
                 <th>Date</th>
-                <th>Shift</th>
                 <th>Check In</th>
                 <th>Notes</th>
                 <th>Image</th>
@@ -70,9 +69,6 @@
                   else : ?>
                     <!-- Column 2 (Date) -->
                     <td><?= date('l, d F Y', $atd['date']); ?></td>
-
-                    <!-- Column 3 (Shift) -->
-                    <td><?= $atd['shift']; ?></td>
 
                     <!-- Column 4 (Check In) -->
                     <td><?= date('H : i : s', $atd['date']); ?></td>

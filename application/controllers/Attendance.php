@@ -19,7 +19,6 @@ class Attendance extends CI_Controller
     // Attendance Form
     $d['title'] = 'Attendance Form';
     $d['account'] = $this->Public_model->getAccount($this->session->userdata['username']);
-    $d['location'] = $this->db->get('location')->result_array();
 
     // If Weekends
     if (is_weekends() == true) {
@@ -36,8 +35,6 @@ class Attendance extends CI_Controller
       if (is_checked_in() == false) {
         $d['in'] = false;
 
-        $this->form_validation->set_rules('work_shift', 'Work Shift', 'required|trim');
-        $this->form_validation->set_rules('location', 'Location', 'required|trim');
 
         if ($this->form_validation->run() == false) {
           $this->load->view('templates/header', $d);
@@ -47,26 +44,16 @@ class Attendance extends CI_Controller
           $this->load->view('templates/footer');
         } else {
           date_default_timezone_set('Asia/Jakarta');
-          $shift = $d['account']['shift'];
-          $queryShift = "SELECT * FROM `shift` WHERE `id` = $shift";
-          $resultShift = $this->db->query($queryShift)->row_array();
-          $startTime = $resultShift['start'];
+
 
           $username = $this->session->userdata['username'];
           $employee_id = $d['account']['id'];
-          $department_id = $d['account']['department_id'];
-          $shift_id = $this->input->post('work_shift');
-          $location_id = $this->input->post('location');
+          $division_id = $d['account']['division_id'];
           $iTime = time();
           $notes = $this->input->post('notes');
           $lack = 'None';
 
-          // Check In Time
-          if (date('H:i:s', $iTime) <= $startTime) {
-            $inStatus = 'On Time';
-          } else {
-            $inStatus = 'Late';
-          };
+          $inStatus = 'Present';
 
           // Check Notes
           if (!$notes) {
@@ -88,9 +75,7 @@ class Attendance extends CI_Controller
               $value = [
                 'username' => $username,
                 'employee_id' => $employee_id,
-                'department_id' => $department_id,
-                'shift_id' => $shift_id,
-                'location_id' => $location_id,
+                'division_id' => $division_id,
                 'in_time' => $iTime,
                 'notes' => $notes,
                 'image' => $image,
@@ -109,9 +94,7 @@ class Attendance extends CI_Controller
             $value = [
               'username' => $username,
               'employee_id' => $employee_id,
-              'department_id' => $department_id,
-              'shift_id' => $shift_id,
-              'location_id' => $location_id,
+              'division_id' => $division_id,
               'in_time' => $iTime,
               'notes' => $notes,
               'lack_of' => $lack,
@@ -159,13 +142,8 @@ class Attendance extends CI_Controller
     $today = date('Y-m-d', time());
     $querySelect = "SELECT  attendance.username AS `username`,
                             attendance.employee_id AS `employee_id`,
-                            attendance.shift_id AS `shift_id`,
-                            attendance.in_time AS `in_time`,
-                            shift.start AS `start`,
-                            shift.end AS `end`
+                            attendance.in_time AS `in_time`
                       FROM  `attendance`
-                INNER JOIN  `shift`
-                        ON  attendance.shift_id = shift.id
                      WHERE  `username` = '$username'
                        AND  FROM_UNIXTIME(`in_time`, '%Y-%m-%d') = '$today'";
     $checkOut = $this->db->query($querySelect)->row_array();

@@ -14,30 +14,30 @@ class Master extends CI_Controller
   public function index()
   {
     // Department Data
-    $d['title'] = 'Department';
-    $d['department'] = $this->db->get('department')->result_array();
+    $d['title'] = 'Division';
+    $d['division'] = $this->db->get('division')->result_array();
     $d['account'] = $this->Admin_model->getAdmin($this->session->userdata['username']);
 
     $this->load->view('templates/table_header', $d);
     $this->load->view('templates/sidebar');
     $this->load->view('templates/topbar');
-    $this->load->view('master/department/index', $d); // Department Page
+    $this->load->view('master/division/index', $d); // Department Page
     $this->load->view('templates/table_footer');
   }
   public function a_dept()
   {
-    // Add Department
-    $d['title'] = 'Department';
+    // Add Division
+    $d['title'] = 'Division';
     $d['account'] = $this->Admin_model->getAdmin($this->session->userdata['username']);
     // Form Validation
-    $this->form_validation->set_rules('d_id', 'Department ID', 'required|trim|exact_length[3]|alpha');
-    $this->form_validation->set_rules('d_name', 'Department Name', 'required|trim');
+    $this->form_validation->set_rules('d_id', 'Division ID', 'required|trim|exact_length[3]|alpha');
+    $this->form_validation->set_rules('d_name', 'Division Name', 'required|trim');
 
     if ($this->form_validation->run() == false) {
       $this->load->view('templates/header', $d);
       $this->load->view('templates/sidebar');
       $this->load->view('templates/topbar');
-      $this->load->view('master/department/a_dept', $d); // Add Department Page
+      $this->load->view('master/division/a_dept', $d); // Add Department Page
       $this->load->view('templates/footer');
     } else {
       $this->_addDept();
@@ -51,32 +51,32 @@ class Master extends CI_Controller
       'name' => $this->input->post('d_name')
     ];
 
-    $checkId = $this->db->get_where('department', ['id' => $data['id']])->num_rows();
+    $checkId = $this->db->get_where('division', ['id' => $data['id']])->num_rows();
     if ($checkId > 0) {
       $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
       Failed to add, ID used!</div>');
     } else {
-      $this->db->insert('department', $data);
+      $this->db->insert('division', $data);
       $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-        Successfully added a new department!</div>');
+        Successfully added a new division!</div>');
     }
     redirect('master');
   }
 
   public function e_dept($d_id)
   {
-    // Edit Department
-    $d['title'] = 'Department';
-    $d['d_old'] = $this->db->get_where('department', ['id' => $d_id])->row_array();
+    // Edit Division
+    $d['title'] = 'Division';
+    $d['d_old'] = $this->db->get_where('division', ['id' => $d_id])->row_array();
     $d['account'] = $this->Admin_model->getAdmin($this->session->userdata['username']);
     // Form Validation
-    $this->form_validation->set_rules('d_name', 'Department Name', 'required|trim');
+    $this->form_validation->set_rules('d_name', 'Division Name', 'required|trim');
 
     if ($this->form_validation->run() == false) {
       $this->load->view('templates/header', $d);
       $this->load->view('templates/sidebar');
       $this->load->view('templates/topbar');
-      $this->load->view('master/department/e_dept', $d); // Edit Department Page
+      $this->load->view('master/division/e_dept', $d); // Edit Division Page
       $this->load->view('templates/footer');
     } else {
       $name = $this->input->post('d_name');
@@ -86,156 +86,19 @@ class Master extends CI_Controller
   private function _editDept($d_id, $name)
   {
     $data = ['name' => $name];
-    $this->db->update('department', $data, ['id' => $d_id]);
+    $this->db->update('division', $data, ['id' => $d_id]);
     $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-        Successfully edited a department!</div>');
+        Successfully edited a division!</div>');
     redirect('master');
   }
   public function d_dept($d_id)
   {
-    $this->db->delete('department', ['id' => $d_id]);
+    $this->db->delete('division', ['id' => $d_id]);
     $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-        Successfully deleted a department!</div>');
+        Successfully deleted a division!</div>');
     redirect('master');
   }
-  // End of department
-  public function shift()
-  {
-    // Shift Data
-    $d['title'] = 'Shift';
-    $d['shift'] = $this->db->get('shift')->result_array();
-    $d['account'] = $this->Admin_model->getAdmin($this->session->userdata['username']);
-
-    $this->load->view('templates/table_header', $d);
-    $this->load->view('templates/sidebar');
-    $this->load->view('templates/topbar');
-    $this->load->view('master/shift/index', $d); // shift Page
-    $this->load->view('templates/table_footer');
-  }
-  public function a_shift()
-  {
-    $generateID = $this->db->get('shift')->num_rows();
-    $d['account'] = $this->Admin_model->getAdmin($this->session->userdata['username']);
-    // Add shift
-    $d['title'] = 'Shift';
-    $d['s_id'] = $generateID + 1;
-
-    // Form Validation
-    $this->form_validation->set_rules('s_start_h', 'Hour', 'required|trim');
-    $this->form_validation->set_rules('s_start_m', 'Minutes', 'required|trim');
-    $this->form_validation->set_rules('s_start_s', 'Seconds', 'required|trim');
-    $this->form_validation->set_rules('s_end_h', 'Hour', 'required|trim');
-    $this->form_validation->set_rules('s_end_m', 'Minutes', 'required|trim');
-    $this->form_validation->set_rules('s_end_s', 'Seconds', 'required|trim');
-
-    if ($this->form_validation->run() == false) {
-      $this->load->view('templates/header', $d);
-      $this->load->view('templates/sidebar');
-      $this->load->view('templates/topbar');
-      $this->load->view('master/shift/a_shift', $d); // Add shift Page
-      $this->load->view('templates/footer');
-    } else {
-      $this->_addShift();
-    }
-  }
-  private function _addShift()
-  {
-    // Start Time
-    $sHour = $this->input->post('s_start_h');
-    $sMinutes = $this->input->post('s_start_m');
-    $sSeconds = $this->input->post('s_start_s');
-
-    // End Time
-    $eHour = $this->input->post('s_end_h');
-    $eMinutes = $this->input->post('s_end_m');
-    $eSeconds = $this->input->post('s_end_s');
-
-    $data = [
-      'start' => $sHour . ':' . $sMinutes . ':' . $sSeconds,
-      'end' => $eHour . ':' . $eMinutes . ':' . $eSeconds,
-    ];
-
-    $this->db->insert('shift', $data);
-    $affectedRow = $this->db->affected_rows();
-    if ($affectedRow > 0) {
-      $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-        Successfully added a new shift!</div>');
-    } else {
-      $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
-      Failed to add new shift!</div>');
-    }
-    redirect('master/shift');
-  }
-
-  public function e_shift($s_id)
-  {
-    $d['account'] = $this->Admin_model->getAdmin($this->session->userdata['username']);
-
-    $data = $this->db->get_where('shift', ['id' => $s_id])->row_array();
-    $start = explode(':', $data['start']);
-    $end = explode(':', $data['end']);
-
-    // Edit shift
-    $d['title'] = 'Shift';
-    $d['s_id'] = $data['id'];
-    $d['s_sh'] = $start[0];
-    $d['s_sm'] = $start[1];
-    $d['s_ss'] = $start[2];
-    $d['s_eh'] = $end[0];
-    $d['s_em'] = $end[1];
-    $d['s_es'] = $end[2];
-
-    // Form Validation
-    $this->form_validation->set_rules('s_start_h', 'Shift Start Hour', 'required|trim');
-    $this->form_validation->set_rules('s_start_m', 'Shift Start Minutes', 'required|trim');
-    $this->form_validation->set_rules('s_start_s', 'Shift Start Seconds', 'required|trim');
-    $this->form_validation->set_rules('s_end_h', 'Shift End Hour', 'required|trim');
-    $this->form_validation->set_rules('s_end_m', 'Shift End Minutes', 'required|trim');
-    $this->form_validation->set_rules('s_end_s', 'Shift End Seconds', 'required|trim');
-
-    if ($this->form_validation->run() == false) {
-      $this->load->view('templates/header', $d);
-      $this->load->view('templates/sidebar');
-      $this->load->view('templates/topbar');
-      $this->load->view('master/shift/e_shift', $d); // Edit shift Page
-      $this->load->view('templates/footer');
-    } else {
-      // Start Time
-      $sHour = $this->input->post('s_start_h');
-      $sMinutes = $this->input->post('s_start_m');
-      $sSeconds = $this->input->post('s_start_s');
-
-      // End Time
-      $eHour = $this->input->post('s_end_h');
-      $eMinutes = $this->input->post('s_end_m');
-      $eSeconds = $this->input->post('s_end_s');
-
-      $set = [
-        'start' => $sHour . ':' . $sMinutes . ':' . $sSeconds,
-        'end' => $eHour . ':' . $eMinutes . ':' . $eSeconds,
-      ];
-      $this->_editShift($s_id, $set);
-    }
-  }
-  private function _editShift($s_id, $set)
-  {
-    $this->db->where('id', $s_id);
-    $this->db->update('shift', $set, ['id' => $s_id]);
-    $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-        Successfully edited a shift!</div>');
-    redirect('master/shift');
-  }
-
-  public function d_shift($s_id)
-  {
-    $query = 'ALTER TABLE `shift` AUTO_INCREMENT = 1';
-    $this->db->delete('shift', ['id' => $s_id]);
-    $this->db->query($query);
-    $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-        Successfully deleted a shift!</div>');
-    redirect('master/shift');
-  }
-  // End of Shift
+  // End of division
 
   public function employee()
   {
@@ -255,14 +118,12 @@ class Master extends CI_Controller
   {
     // Add Employee
     $d['title'] = 'Employee';
-    $d['department'] = $this->db->get('department')->result_array();
-    $d['shift'] = $this->db->get('shift')->result_array();
+    $d['division'] = $this->db->get('division')->result_array();
     $d['account'] = $this->Admin_model->getAdmin($this->session->userdata['username']);
 
     // Form Validation
     $this->form_validation->set_rules('e_name', 'Employee Name', 'required|trim');
     $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email');
-    $this->form_validation->set_rules('s_id', 'Shift', 'required|trim');
     $this->form_validation->set_rules('e_gender', 'Gender', 'required');
     $this->form_validation->set_rules('e_birth_date', 'Birth Date', 'required|trim');
     $this->form_validation->set_rules('e_hire_date', 'Hire Date', 'required|trim');
@@ -281,12 +142,11 @@ class Master extends CI_Controller
   private function _addEmployee()
   {
     $name = $this->input->post('e_name');
-    $department = $this->input->post('d_id');
+    $division = $this->input->post('d_id');
     $email = $this->input->post('email');
     $gender = $this->input->post('e_gender');
     $birth_date = $this->input->post('e_birth_date');
     $hire_date = $this->input->post('e_hire_date');
-    $shift_id = $this->input->post('s_id');
 
     // Check Email
     $query = "SELECT * FROM employee WHERE email = '$email'";
@@ -321,8 +181,7 @@ class Master extends CI_Controller
       'gender' => $gender,
       'image' => $image,
       'birth_date' => $birth_date,
-      'hire_date' => $hire_date,
-      'shift_id' => $shift_id
+      'hire_date' => $hire_date
     ];
 
     $this->db->insert('employee', $data);
@@ -331,11 +190,11 @@ class Master extends CI_Controller
     // die;
     $e_id = $getEmp['id'];
     $d = [
-      'department_id' => $department,
+      'division_id' => $division,
       'employee_id' => $e_id
     ];
 
-    $this->db->insert('employee_department', $d);
+    $this->db->insert('employee_division', $d);
     $rows = $this->db->affected_rows();
     if ($rows > 0) {
       $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
@@ -351,17 +210,15 @@ class Master extends CI_Controller
   {
     $d['title'] = 'Employee';
     $d['employee'] = $this->db->get_where('employee', ['id' => $e_id])->row_array();
-    $d['department_current'] = $this->db->get_where('employee_department', ['employee_id' => $e_id])->row_array();
-    $d['department'] = $this->db->get('department')->result_array();
-    $d['shift'] = $this->db->get('shift')->result_array();
+    $d['division_current'] = $this->db->get_where('employee_division', ['employee_id' => $e_id])->row_array();
+    $d['division'] = $this->db->get('division')->result_array();
     $d['account'] = $this->Admin_model->getAdmin($this->session->userdata['username']);
 
     $this->form_validation->set_rules('e_name', 'Name', 'required|trim');
     $this->form_validation->set_rules('e_gender', 'Gender', 'required');
     $this->form_validation->set_rules('e_birth_date', 'Birth Date', 'required|trim');
     $this->form_validation->set_rules('e_hire_date', 'Hire Date', 'required|trim');
-    $this->form_validation->set_rules('s_id', 'Shift', 'required|trim');
-    $this->form_validation->set_rules('d_id', 'Department', 'required|trim');
+    $this->form_validation->set_rules('d_id', 'Division', 'required|trim');
 
     if ($this->form_validation->run() == false) {
       $this->load->view('templates/header', $d);
@@ -403,20 +260,19 @@ class Master extends CI_Controller
         'gender' => $gender,
         'image' => $image,
         'birth_date' => $birth_date,
-        'hire_date' => $hire_date,
-        'shift_id' => $s_id
+        'hire_date' => $hire_date
       ];
-      $department = [
-        'department_id' => $d_id
+      $division = [
+        'division_id' => $d_id
       ];
-      $this->_editEmployee($e_id, $data, $department);
+      $this->_editEmployee($e_id, $data, $division);
     }
   }
-  private function _editEmployee($e_id, $data, $department)
+  private function _editEmployee($e_id, $data, $division)
   {
     $this->db->update('employee', $data, ['id' => $e_id]);
     $upd1 = $this->db->affected_rows();
-    $this->db->update('employee_department', $department, ['employee_id' => $e_id]);
+    $this->db->update('employee_division', $division, ['employee_id' => $e_id]);
     $upd2 = $this->db->affected_rows();
     if ($upd1 > 0 && $upd2 > 0) {
       $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
@@ -443,117 +299,18 @@ class Master extends CI_Controller
         Successfully deleted an employee!</div>');
     redirect('master/employee');
   }
-  public function location()
-  {
-    $d['title'] = 'Location';
-    $d['location'] = $this->db->get('location')->result_array();
-    $d['account'] = $this->Admin_model->getAdmin($this->session->userdata['username']);
-
-    $this->load->view('templates/table_header', $d);
-    $this->load->view('templates/sidebar');
-    $this->load->view('templates/topbar');
-    $this->load->view('master/location/index', $d);
-    $this->load->view('templates/table_footer');
-  }
-  public function a_location()
-  {
-    $d['title'] = 'Location';
-    $d['account'] = $this->Admin_model->getAdmin($this->session->userdata['username']);
-
-    $this->form_validation->set_rules('l_name', 'Location Name', 'required|trim');
-
-    if ($this->form_validation->run() == false) {
-      $this->load->view('templates/header', $d);
-      $this->load->view('templates/sidebar');
-      $this->load->view('templates/topbar');
-      $this->load->view('master/location/a_location', $d);
-      $this->load->view('templates/footer');
-    } else {
-      $data['name'] = $this->input->post('l_name');
-      $this->_addLocation($data);
-    }
-  }
-  private function _addLocation($data)
-  {
-    $this->db->insert('location', $data);
-    $rows = $this->db->affected_rows();
-
-    if ($rows > 0) {
-      $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-        Successfully added a new location!</div>');
-    } else {
-      $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
-        Failed to add data!</div>');
-    }
-    redirect('master/location');
-  }
-  public function e_location($l_id)
-  {
-    // Edit Location
-    $d['title'] = 'Location';
-    $d['l_old'] = $this->db->get_where('location', ['id' => $l_id])->row_array();
-    $d['account'] = $this->Admin_model->getAdmin($this->session->userdata['username']);
-
-    // Form Validation
-    $this->form_validation->set_rules('l_name', 'Location Name', 'required|trim');
-
-    if ($this->form_validation->run() == false) {
-      $this->load->view('templates/header', $d);
-      $this->load->view('templates/sidebar');
-      $this->load->view('templates/topbar');
-      $this->load->view('master/Location/e_location', $d); // Edit Location Page
-      $this->load->view('templates/footer');
-    } else {
-      $name = $this->input->post('l_name');
-      $this->_editLocation($l_id, $name);
-    }
-  }
-  private function _editLocation($l_id, $name)
-  {
-    $data = ['name' => $name];
-    $this->db->update('location', $data, ['id' => $l_id]);
-    $rows = $this->db->affected_rows();
-
-    if ($rows > 0) {
-      $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-          Successfully edited a location!</div>');
-    } else {
-      $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
-        Failed to edit data!</div>');
-    }
-
-    redirect('master/location');
-  }
-  public function d_location($l_id)
-  {
-    $query = 'ALTER TABLE `location` AUTO_INCREMENT = 1';
-    $this->db->query($query);
-    $this->db->delete('location', ['id' => $l_id]);
-    $rows = $this->db->affected_rows();
-
-    if ($rows > 0) {
-      $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-        Successfully deleted a location!</div>');
-    } else {
-      $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
-        Failed to delete a data!</div>');
-    }
-
-    redirect('master/employee');
-  }
-  // end of location
 
   public function users()
   {
-    $query = "SELECT employee_department.employee_id AS e_id,
-                     employee_department.department_id AS d_id,
+    $query = "SELECT employee_division.employee_id AS e_id,
+                     employee_division.division_id AS d_id,
                      users.username AS u_username,
                      employee.name AS e_name
-                FROM employee_department
+                FROM employee_division
            LEFT JOIN users
-                  ON employee_department.employee_id = users.employee_id
+                  ON employee_division.employee_id = users.employee_id
           INNER JOIN employee
-                  ON employee_department.employee_id = employee.id
+                  ON employee_division.employee_id = employee.id
           ";
     $d['title'] = 'Users';
     $d['data'] = $this->db->query($query)->result_array();
@@ -568,9 +325,9 @@ class Master extends CI_Controller
 
   public function a_users($e_id)
   {
-    $empDep = $this->db->get_where('employee_department', ['employee_id' => $e_id])->row_array();
+    $empDep = $this->db->get_where('employee_division', ['employee_id' => $e_id])->row_array();
     $d['title'] = 'Users';
-    $d['username'] = $empDep['department_id'] . $empDep['employee_id'];
+    $d['username'] = $empDep['division_id'] . $empDep['employee_id'];
     $d['e_id'] = $empDep['employee_id'];
     $d['account'] = $this->Admin_model->getAdmin($this->session->userdata['username']);
 
@@ -585,7 +342,7 @@ class Master extends CI_Controller
       $this->load->view('templates/footer');
     } else {
       $username = $this->input->post('u_username');
-      if ($empDep['department_id'] != 'ADM') {
+      if ($empDep['division_id'] != 'ADM') {
         $role_id = 2;
       } else {
         $role_id = 1;

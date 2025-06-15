@@ -21,8 +21,8 @@
           </div>
           <div class="col-3">
             <select class="form-control" name="dept">
-              <option disabled>Department</option>
-              <?php foreach ($department as $d) : ?>
+              <option disabled>Division</option>
+              <?php foreach ($division as $d) : ?>
                 <option value="<?= $d['id']; ?>"><?= $d['id']; ?></option>
               <?php endforeach; ?>
             </select>
@@ -38,7 +38,7 @@
   </div>
   <!-- End of row show -->
   <?php if ($attendance == false) : ?>
-    <h1>No Data, Please Pick Your Date and Department</h1>
+    <h1>No Data, Please Pick Your Date and Division</h1>
   <?php else : ?>
     <?php if ($attendance != null) : ?>
       <div class="card shadow mb-4">
@@ -53,7 +53,6 @@
                   <th>#</th>
                   <th>Date</th>
                   <th>Name</th>
-                  <th>Shift</th>
                   <th>Check In</th>
                   <th>Notes</th>
                   <th>Lack Of</th>
@@ -69,7 +68,6 @@
                     <th><?= $i++ ?></th>
                     <td><?= date('Y-m-d', $atd['date']) ?></td>
                     <td><?= $atd['name'] ?></td>
-                    <td><?= $atd['shift'] ?></td>
                     <td><?= date('H:i:s', $atd['date']) ?></td>
                     <td><?php if ($atd['notes'] == '') {
                           echo 'Unfilled';

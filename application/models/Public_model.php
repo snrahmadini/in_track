@@ -9,15 +9,14 @@ class Public_model extends CI_Model
     $e_id = $account['employee_id'];
     $query = "SELECT  employee.id AS `id`,
                       employee.name AS `name`,
-                      employee.gender AS `gender`,   
-                      employee.shift_id AS `shift`,
+                      employee.gender AS `gender`,
                       employee.image AS `image`,
                       employee.birth_date AS `birth_date`,
                       employee.hire_date AS `hire_date`,
-                      department.id AS `department_id`
+                      division.id AS `division_id`
                 FROM  employee
-          INNER JOIN  employee_department ON employee.id = employee_department.employee_id
-          INNER JOIN  department ON employee_department.department_id = department.id
+          INNER JOIN  employee_division ON employee.id = employee_division.employee_id
+          INNER JOIN  division ON employee_division.division_id = division.id
                WHERE `employee`.`id` = '$e_id'";
     return $this->db->query($query)->row_array();
   }
@@ -25,7 +24,6 @@ class Public_model extends CI_Model
   public function get_attendance($start, $end, $dept)
   {
     $query = "SELECT  attendance.in_time AS date,
-                      attendance.shift_id AS shift,
                       employee.name AS name,
                       attendance.notes AS notes,
                       attendance.image AS image,
@@ -35,11 +33,11 @@ class Public_model extends CI_Model
                       attendance.out_status AS out_status,
                       attendance.employee_id AS e_id
                 FROM  attendance
-          INNER JOIN  employee_department
-                  ON  attendance.employee_id = employee_department.employee_id
+          INNER JOIN  employee_division
+                  ON  attendance.employee_id = employee_division.employee_id
           INNER JOIN  employee
                   ON  attendance.employee_id = employee.id
-                WHERE  employee_department.department_id = '$dept'
+                WHERE  employee_division.division_id = '$dept'
                   AND  (DATE(FROM_UNIXTIME(in_time)) BETWEEN '$start' AND '$end')
             ORDER BY  `date` ASC";
 
@@ -59,10 +57,10 @@ class Public_model extends CI_Model
                       employee.image AS `image`,
                       employee.birth_date AS `birth_date`,
                       employee.hire_date AS `hire_date`,
-                      department.name AS `department`
+                      division.name AS `division`
                 FROM  employee
-          INNER JOIN  employee_department ON employee.id = employee_department.employee_id
-          INNER JOIN  department ON employee_department.department_id = department.id
+          INNER JOIN  employee_division ON employee.id = employee_division.employee_id
+          INNER JOIN  division ON employee_division.division_id = division.id
                WHERE `employee`.`id` = $e_id";
     // get employee data from employee table using employee id and return the row
     return $this->db->query($query)->row_array();

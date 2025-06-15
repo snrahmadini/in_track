@@ -32,8 +32,8 @@
                   }; ?></td>
           </tr>
           <tr>
-            <th scope="row">Department</th>
-            <td>: <?= $account['department'] ?></td>
+            <th scope="row">Division</th>
+            <td>: <?= $account['division'] ?></td>
           </tr>
           <tr>
             <th scope="row">Birthday</th>

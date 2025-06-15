@@ -21,7 +21,7 @@
     </div>
     <div class="row mb-3">
       <div class="col-6">
-        <h1 class="h5">Department Code : <?= $dept ?></h1>
+        <h1 class="h5">Division Code : <?= $dept ?></h1>
       </div>
       <div class="col-6 text-right">
         <?php if ($start != null || $end != null) : ?>
@@ -36,7 +36,6 @@
         <tr>
           <th>#</th>
           <th>Date</th>
-          <th>Shift</th>
           <th>Check In</th>
           <th>Notes</th>
           <th>Lack Of</th>
@@ -70,9 +69,6 @@
             else : ?>
               <!-- Kolom 2 (Date) -->
               <td><?= date('l, d F Y', $atd['date']); ?></td>
-
-              <!-- Kolom 3 (Shift) -->
-              <td><?= $atd['shift']; ?></td>
 
               <!-- Kolom 4 (Check In) -->
               <td><?= date('H : i : s', $atd['date']); ?></td>

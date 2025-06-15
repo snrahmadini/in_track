@@ -74,7 +74,7 @@
                         <div class="form-group">
                           <label for="e_birth_date" class="col-form-label">Employee D.O.B</label>
                           <div class="col-lg p-0">
-                            <input type="date" class="form-control" name="e_birth_date" id="e_birth_date" min="1990-01-01" max="2002-01-01" value="<?= $employee['birth_date']; ?>">
+                            <input type="date" class="form-control" name="e_birth_date" id="e_birth_date" min="1900-01-01" max="2010-01-01" value="<?= $employee['birth_date']; ?>">
                             <?= form_error('e_birth_date', '<small class="text-danger">', '</small>') ?>
                           </div>
                         </div>
@@ -92,22 +92,10 @@
                     <div class="row">
                       <div class="col-lg-6">
                         <div class="form-group">
-                          <label for="s_id" class="col-form-label">Shift</label>
-                          <select class="form-control" name="s_id" id="s_id">
-                            <?php foreach ($shift as $sft) : ?>
-                              <option value="<?= $sft['id'] ?>" <?php if ($sft['id'] ==  $employee['shift_id']) {
-                                                                  echo 'selected';
-                                                                }; ?>><?= $sft['id'] ?></option>
-                            <?php endforeach; ?>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="col-lg-6">
-                        <div class="form-group">
-                          <label for="d_id" class="col-form-label">Department</label>
+                          <label for="d_id" class="col-form-label">Divisi</label>
                           <select class="form-control" name="d_id" id="d_id">
-                            <?php foreach ($department as $dpt) : ?>
-                              <option value="<?= $dpt['id'] ?>" <?php if ($dpt['id'] ==  $department_current['department_id']) {
+                            <?php foreach ($division as $dpt) : ?>
+                              <option value="<?= $dpt['id'] ?>" <?php if ($dpt['id'] ==  $division_current['division_id']) {
                                                                   echo 'selected';
                                                                 }; ?>><?= $dpt['id'] ?></option>
                             <?php endforeach; ?>
