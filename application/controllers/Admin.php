@@ -19,7 +19,7 @@ class Admin extends CI_Controller
   // Dashboard
   public function index()
   {
-    $dquery = "SELECT division_id AS d_id, COUNT(employee_id) AS qty FROM employee_division GROUP BY d_id";
+    $dquery = "SELECT division_id AS d_id, COUNT(intern_id) AS qty FROM intern_division GROUP BY d_id";
     $d['d_list'] = $this->db->query($dquery)->result_array();
     // Dashboard
     $d['title'] = 'Dashboard';

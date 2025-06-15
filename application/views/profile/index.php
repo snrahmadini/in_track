@@ -20,7 +20,7 @@
       <table class="table">
         <tbody>
           <tr>
-            <th scope="row">Employee ID</th>
+            <th scope="row">Intern ID</th>
             <td>: <?= $account['id']; ?></td>
           </tr>
           <tr>

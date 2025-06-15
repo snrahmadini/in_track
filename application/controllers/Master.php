@@ -100,29 +100,29 @@ class Master extends CI_Controller
   }
   // End of division
 
-  public function employee()
+  public function intern()
   {
-    // Employee Data
-    $d['title'] = 'Employee';
-    $d['employee'] = $this->db->get('employee')->result_array();
+    // Intern Data
+    $d['title'] = 'Intern';
+    $d['intern'] = $this->db->get('intern')->result_array();
     $d['account'] = $this->Admin_model->getAdmin($this->session->userdata['username']);
 
     $this->load->view('templates/table_header', $d);
     $this->load->view('templates/sidebar');
     $this->load->view('templates/topbar');
-    $this->load->view('master/employee/index', $d); // Employee Page
+    $this->load->view('master/intern/index', $d); // Intern Page
     $this->load->view('templates/table_footer');
   }
 
-  public function a_employee()
+  public function a_intern()
   {
-    // Add Employee
-    $d['title'] = 'Employee';
+    // Add Intern
+    $d['title'] = 'Intern';
     $d['division'] = $this->db->get('division')->result_array();
     $d['account'] = $this->Admin_model->getAdmin($this->session->userdata['username']);
 
     // Form Validation
-    $this->form_validation->set_rules('e_name', 'Employee Name', 'required|trim');
+    $this->form_validation->set_rules('e_name', 'Intern Name', 'required|trim');
     $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email');
     $this->form_validation->set_rules('e_gender', 'Gender', 'required');
     $this->form_validation->set_rules('e_birth_date', 'Birth Date', 'required|trim');
@@ -132,14 +132,14 @@ class Master extends CI_Controller
       $this->load->view('templates/header', $d);
       $this->load->view('templates/sidebar');
       $this->load->view('templates/topbar');
-      $this->load->view('master/employee/a_employee', $d); // Add Employee Page
+      $this->load->view('master/intern/a_intern', $d); // Add Intern Page
       $this->load->view('templates/footer');
     } else {
-      $this->_addEmployee();
+      $this->_addIntern();
     }
   }
 
-  private function _addEmployee()
+  private function _addIntern()
   {
     $name = $this->input->post('e_name');
     $division = $this->input->post('d_id');
@@ -149,13 +149,13 @@ class Master extends CI_Controller
     $hire_date = $this->input->post('e_hire_date');
 
     // Check Email
-    $query = "SELECT * FROM employee WHERE email = '$email'";
+    $query = "SELECT * FROM intern WHERE email = '$email'";
     $checkEmail = $this->db->query($query)->num_rows();
 
     if ($checkEmail > 0) {
       $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
       Email already used!</div>');
-      redirect('master/a_employee');
+      redirect('master/a_intern');
     }
 
     // Config Upload Image
@@ -184,33 +184,33 @@ class Master extends CI_Controller
       'hire_date' => $hire_date
     ];
 
-    $this->db->insert('employee', $data);
-    $getEmp = $this->db->get_where('employee', ['email' => $data['email']])->row_array();
+    $this->db->insert('intern', $data);
+    $getEmp = $this->db->get_where('intern', ['email' => $data['email']])->row_array();
     // var_dump($getEmp);
     // die;
     $e_id = $getEmp['id'];
     $d = [
       'division_id' => $division,
-      'employee_id' => $e_id
+      'intern_id' => $e_id
     ];
 
-    $this->db->insert('employee_division', $d);
+    $this->db->insert('intern_division', $d);
     $rows = $this->db->affected_rows();
     if ($rows > 0) {
       $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-        Successfully added a new employee!</div>');
+        Successfully added a new intern!</div>');
     } else {
       $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
         Failed to add data!</div>');
     }
-    redirect('master/employee');
+    redirect('master/intern');
   }
 
-  public function e_employee($e_id)
+  public function e_intern($e_id)
   {
-    $d['title'] = 'Employee';
-    $d['employee'] = $this->db->get_where('employee', ['id' => $e_id])->row_array();
-    $d['division_current'] = $this->db->get_where('employee_division', ['employee_id' => $e_id])->row_array();
+    $d['title'] = 'Intern';
+    $d['intern'] = $this->db->get_where('intern', ['id' => $e_id])->row_array();
+    $d['division_current'] = $this->db->get_where('intern_division', ['intern_id' => $e_id])->row_array();
     $d['division'] = $this->db->get('division')->result_array();
     $d['account'] = $this->Admin_model->getAdmin($this->session->userdata['username']);
 
@@ -224,7 +224,7 @@ class Master extends CI_Controller
       $this->load->view('templates/header', $d);
       $this->load->view('templates/sidebar');
       $this->load->view('templates/topbar');
-      $this->load->view('master/employee/e_employee', $d); // Edit Employee Page
+      $this->load->view('master/intern/e_intern', $d); // Edit Intern Page
       $this->load->view('templates/footer');
     } else {
       $name = $this->input->post('e_name');
@@ -246,7 +246,7 @@ class Master extends CI_Controller
       if ($_FILES['image']['name']) {
         if ($this->upload->do_upload('image')) {
           $image = $this->upload->data('file_name');
-          $old_image = $d['employee']['image'];
+          $old_image = $d['intern']['image'];
           if ($old_image != 'default.png') {
             unlink('./images/pp/' . $old_image);
           }
@@ -265,52 +265,52 @@ class Master extends CI_Controller
       $division = [
         'division_id' => $d_id
       ];
-      $this->_editEmployee($e_id, $data, $division);
+      $this->_editIntern($e_id, $data, $division);
     }
   }
-  private function _editEmployee($e_id, $data, $division)
+  private function _editIntern($e_id, $data, $division)
   {
-    $this->db->update('employee', $data, ['id' => $e_id]);
+    $this->db->update('intern', $data, ['id' => $e_id]);
     $upd1 = $this->db->affected_rows();
-    $this->db->update('employee_division', $division, ['employee_id' => $e_id]);
+    $this->db->update('intern_division', $division, ['intern_id' => $e_id]);
     $upd2 = $this->db->affected_rows();
     if ($upd1 > 0 && $upd2 > 0) {
       $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-      Successfully updated an employee!</div>');
-      redirect('master/employee');
+      Successfully updated an intern!</div>');
+      redirect('master/intern');
     } else if ($upd1 > 0 && $upd2 <= 0) {
       $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-      Successfully updated an employee!</div>');
-      redirect('master/employee');
+      Successfully updated an intern!</div>');
+      redirect('master/intern');
     } else if ($upd1  <= 0 && $upd2 > 0) {
       $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-      Successfully updated an employee!</div>');
-      redirect('master/employee');
+      Successfully updated an intern!</div>');
+      redirect('master/intern');
     } else {
       $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
-      Failed to update employee\'s data!</div>');
-      redirect('master/employee');
+      Failed to update intern\'s data!</div>');
+      redirect('master/intern');
     }
   }
-  public function d_employee($e_id)
+  public function d_intern($e_id)
   {
-    $this->db->delete('employee', ['id' => $e_id]);
+    $this->db->delete('intern', ['id' => $e_id]);
     $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-        Successfully deleted an employee!</div>');
-    redirect('master/employee');
+        Successfully deleted an intern!</div>');
+    redirect('master/intern');
   }
 
   public function users()
   {
-    $query = "SELECT employee_division.employee_id AS e_id,
-                     employee_division.division_id AS d_id,
+    $query = "SELECT intern_division.intern_id AS e_id,
+                     intern_division.division_id AS d_id,
                      users.username AS u_username,
-                     employee.name AS e_name
-                FROM employee_division
+                     intern.name AS e_name
+                FROM intern_division
            LEFT JOIN users
-                  ON employee_division.employee_id = users.employee_id
-          INNER JOIN employee
-                  ON employee_division.employee_id = employee.id
+                  ON intern_division.intern_id = users.intern_id
+          INNER JOIN intern
+                  ON intern_division.intern_id = intern.id
           ";
     $d['title'] = 'Users';
     $d['data'] = $this->db->query($query)->result_array();
@@ -325,10 +325,10 @@ class Master extends CI_Controller
 
   public function a_users($e_id)
   {
-    $empDep = $this->db->get_where('employee_division', ['employee_id' => $e_id])->row_array();
+    $empDep = $this->db->get_where('intern_division', ['intern_id' => $e_id])->row_array();
     $d['title'] = 'Users';
-    $d['username'] = $empDep['division_id'] . $empDep['employee_id'];
-    $d['e_id'] = $empDep['employee_id'];
+    $d['username'] = $empDep['division_id'] . $empDep['intern_id'];
+    $d['e_id'] = $empDep['intern_id'];
     $d['account'] = $this->Admin_model->getAdmin($this->session->userdata['username']);
 
     $this->form_validation->set_rules('u_username', 'Username', 'required|trim|min_length[6]');
@@ -350,7 +350,7 @@ class Master extends CI_Controller
       $data = [
         'username' => $username,
         'password' => password_hash($this->input->post('u_password'), PASSWORD_DEFAULT),
-        'employee_id' => $this->input->post('e_id'),
+        'intern_id' => $this->input->post('e_id'),
         'role_id' => $role_id
       ];
       $this->_addUsers($data);

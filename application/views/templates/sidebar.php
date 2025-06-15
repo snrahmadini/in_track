@@ -6,7 +6,7 @@
         <div class="sidebar-brand-icon">
           <i class="fas fa-user-check"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">Employee Attandance</div>
+        <div class="sidebar-brand-text mx-3">Intern Tracker</div>
       </a>
 
 

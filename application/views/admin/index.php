@@ -44,8 +44,8 @@
                <div class="card-body">
                  <div class="row no-gutters align-items-center">
                    <div class="col mr-2">
-                     <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Employees</div>
-                     <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $display['c_employee']; ?> Employees</div>
+                     <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Interns</div>
+                     <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $display['c_intern']; ?> Interns</div>
                    </div>
                    <div class="col-auto">
                      <i class="fas fa-id-badge fa-2x text-gray-300"></i>
