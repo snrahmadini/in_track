@@ -16,7 +16,7 @@
   <div class="container border">
     <div class="row mb-2">
       <div class="col">
-        <h2 class="text-center">Employee Attendance Report</h2>
+        <h2 class="text-center">Intern Tracker Report</h2>
       </div>
     </div>
     <div class="row mb-3">

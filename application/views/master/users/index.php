@@ -22,7 +22,7 @@
                     <tr>
                       <th>#</th>
                       <th>EmpID</th>
-                      <th>Employee</th>
+                      <th>Intern</th>
                       <th>Dept.ID</th>
                       <th>Username</th>
                       <th>Actions</th>

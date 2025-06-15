@@ -5,7 +5,7 @@
           <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
           <div class="row">
             <div class="col-lg-3">
-              <a href="<?= base_url('master/employee'); ?>" class="btn btn-secondary btn-icon-split mb-4">
+              <a href="<?= base_url('master/intern'); ?>" class="btn btn-secondary btn-icon-split mb-4">
                 <span class="icon text-white">
                   <i class="fas fa-chevron-left"></i>
                 </span>
@@ -17,16 +17,16 @@
             </div>
           </div>
           <div class="col-lg-10 p-0">
-            <?= form_open_multipart('master/a_employee'); ?>
+            <?= form_open_multipart('master/a_intern'); ?>
             <div class="card">
-              <h5 class="card-header">Employee Master Data</h5>
+              <h5 class="card-header">Intern Master Data</h5>
               <div class="card-body">
-                <h5 class="card-title">Add New Employee</h5>
-                <p class="card-text">Form to add new employee to system</p>
+                <h5 class="card-title">Add New Intern</h5>
+                <p class="card-text">Form to add new intern to system</p>
                 <div class="row">
                   <div class="col-lg-6">
                     <div class="form-group row">
-                      <label for="e_name" class="col-form-label col-lg-4">Employee Name</label>
+                      <label for="e_name" class="col-form-label col-lg-4">Intern Name</label>
                       <div class="col p-0">
                         <input type="text" class="form-control col-lg" name="e_name" id="e_name" autofocus>
                         <?= form_error('e_name', '<small class="text-danger">', '</small>') ?>
@@ -68,13 +68,13 @@
                   </div>
                   <div class="col-lg-6">
                     <div class="form-group row">
-                      <label for="image" class="col-form-label col-lg-4">Employee Image</label>
+                      <label for="image" class="col-form-label col-lg-4">Intern Image</label>
                       <div class="col-lg-8 p-0">
                         <input type="file" name="image" id="image">
                       </div>
                     </div>
                     <div class="form-group row">
-                      <label for="e_birth_date" class="col-form-label col-lg-4">Employee D.O.B</label>
+                      <label for="e_birth_date" class="col-form-label col-lg-4">Intern D.O.B</label>
                       <div class="col-lg p-0">
                         <input type="date" class="form-control col-lg" name="e_birth_date" id="e_birth_date" min="1900-01-01" max="2010-01-01">
                         <?= form_error('e_birth_date', '<small class="text-danger">', '</small>') ?>

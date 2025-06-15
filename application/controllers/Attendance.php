@@ -47,7 +47,7 @@ class Attendance extends CI_Controller
 
 
           $username = $this->session->userdata['username'];
-          $employee_id = $d['account']['id'];
+          $intern_id = $d['account']['id'];
           $division_id = $d['account']['division_id'];
           $iTime = time();
           $notes = $this->input->post('notes');
@@ -74,7 +74,7 @@ class Attendance extends CI_Controller
               $image = $this->upload->data('file_name');
               $value = [
                 'username' => $username,
-                'employee_id' => $employee_id,
+                'intern_id' => $intern_id,
                 'division_id' => $division_id,
                 'in_time' => $iTime,
                 'notes' => $notes,
@@ -93,7 +93,7 @@ class Attendance extends CI_Controller
             }
             $value = [
               'username' => $username,
-              'employee_id' => $employee_id,
+              'intern_id' => $intern_id,
               'division_id' => $division_id,
               'in_time' => $iTime,
               'notes' => $notes,
@@ -141,7 +141,7 @@ class Attendance extends CI_Controller
     $username = $this->session->userdata['username'];
     $today = date('Y-m-d', time());
     $querySelect = "SELECT  attendance.username AS `username`,
-                            attendance.employee_id AS `employee_id`,
+                            attendance.intern_id AS `intern_id`,
                             attendance.in_time AS `in_time`
                       FROM  `attendance`
                      WHERE  `username` = '$username'

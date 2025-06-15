@@ -6,63 +6,63 @@ class Public_model extends CI_Model
   public function getAccount($username)
   {
     $account = $this->db->get_where('users', ['username' => $username])->row_array();
-    $e_id = $account['employee_id'];
-    $query = "SELECT  employee.id AS `id`,
-                      employee.name AS `name`,
-                      employee.gender AS `gender`,
-                      employee.image AS `image`,
-                      employee.birth_date AS `birth_date`,
-                      employee.hire_date AS `hire_date`,
+    $e_id = $account['intern_id'];
+    $query = "SELECT  intern.id AS `id`,
+                      intern.name AS `name`,
+                      intern.gender AS `gender`,
+                      intern.image AS `image`,
+                      intern.birth_date AS `birth_date`,
+                      intern.hire_date AS `hire_date`,
                       division.id AS `division_id`
-                FROM  employee
-          INNER JOIN  employee_division ON employee.id = employee_division.employee_id
-          INNER JOIN  division ON employee_division.division_id = division.id
-               WHERE `employee`.`id` = '$e_id'";
+                FROM  intern
+          INNER JOIN  intern_division ON intern.id = intern_division.intern_id
+          INNER JOIN  division ON intern_division.division_id = division.id
+               WHERE `intern`.`id` = '$e_id'";
     return $this->db->query($query)->row_array();
   }
 
   public function get_attendance($start, $end, $dept)
   {
     $query = "SELECT  attendance.in_time AS date,
-                      employee.name AS name,
+                      intern.name AS name,
                       attendance.notes AS notes,
                       attendance.image AS image,
                       attendance.lack_of AS lack_of,
                       attendance.in_status AS in_status,
                       attendance.out_time AS out_time,
                       attendance.out_status AS out_status,
-                      attendance.employee_id AS e_id
+                      attendance.intern_id AS e_id
                 FROM  attendance
-          INNER JOIN  employee_division
-                  ON  attendance.employee_id = employee_division.employee_id
-          INNER JOIN  employee
-                  ON  attendance.employee_id = employee.id
-                WHERE  employee_division.division_id = '$dept'
+          INNER JOIN  intern_division
+                  ON  attendance.intern_id = intern_division.intern_id
+          INNER JOIN  intern
+                  ON  attendance.intern_id = intern.id
+                WHERE  intern_division.division_id = '$dept'
                   AND  (DATE(FROM_UNIXTIME(in_time)) BETWEEN '$start' AND '$end')
             ORDER BY  `date` ASC";
 
     return $this->db->query($query)->result_array();
   }
 
-  public function getAllEmployeeData($username)
+  public function getAllInternData($username)
   {
-    // get employee id from users table
+    // get intern id from users table
     $data = $this->db->get_where('users', ['username' => $username])->row_array();
-    $e_id = $data['employee_id'];
+    $e_id = $data['intern_id'];
 
     // Join Query
-    $query = "SELECT  employee.id AS `id`,
-                      employee.name AS `name`,
-                      employee.gender AS `gender`,
-                      employee.image AS `image`,
-                      employee.birth_date AS `birth_date`,
-                      employee.hire_date AS `hire_date`,
+    $query = "SELECT  intern.id AS `id`,
+                      intern.name AS `name`,
+                      intern.gender AS `gender`,
+                      intern.image AS `image`,
+                      intern.birth_date AS `birth_date`,
+                      intern.hire_date AS `hire_date`,
                       division.name AS `division`
-                FROM  employee
-          INNER JOIN  employee_division ON employee.id = employee_division.employee_id
-          INNER JOIN  division ON employee_division.division_id = division.id
-               WHERE `employee`.`id` = $e_id";
-    // get employee data from employee table using employee id and return the row
+                FROM  intern
+          INNER JOIN  intern_division ON intern.id = intern_division.intern_id
+          INNER JOIN  division ON intern_division.division_id = division.id
+               WHERE `intern`.`id` = $e_id";
+    // get intern data from intern table using intern id and return the row
     return $this->db->query($query)->row_array();
   }
 }

@@ -6,21 +6,21 @@ class Admin_model extends CI_Model
   public function getAdmin($username)
   {
     $account = $this->db->get_where('users', ['username' => $username])->row_array();
-    $e_id = $account['employee_id'];
-    $query = "SELECT  employee.id AS `id`,
-                      employee.name AS `name`,
-                      employee.gender AS `gender`,
-                      employee.image AS `image`,
-                      employee.birth_date AS `birth_date`,
-                      employee.hire_date AS `hire_date`
-                FROM  employee
-               WHERE `employee`.`id` = '$e_id'";
+    $e_id = $account['intern_id'];
+    $query = "SELECT  intern.id AS `id`,
+                      intern.name AS `name`,
+                      intern.gender AS `gender`,
+                      intern.image AS `image`,
+                      intern.birth_date AS `birth_date`,
+                      intern.hire_date AS `hire_date`
+                FROM  intern
+               WHERE `intern`.`id` = '$e_id'";
     return $this->db->query($query)->row_array();
   }
   public function getDataForDashboard()
   {
-    $d['employee'] = $this->db->get('employee')->result_array();
-    $d['c_employee'] = $this->db->get('employee')->num_rows();
+    $d['intern'] = $this->db->get('intern')->result_array();
+    $d['c_intern'] = $this->db->get('intern')->num_rows();
     $d['division'] = $this->db->get('division')->result_array();
     $d['c_division'] = $this->db->get('division')->num_rows();
     $d['users'] = $this->db->get('users')->result_array();
@@ -33,30 +33,30 @@ class Admin_model extends CI_Model
   {
     $query = "SELECT  division.name AS d_name,
                       division.id AS d_id,
-                      COUNT(employee_division.employee_id) AS d_quantity
+                      COUNT(intern_division.intern_id) AS d_quantity
                 FROM  division
-                JOIN  employee_division
-                  ON  division.id = employee_division.division_id
+                JOIN  intern_division
+                  ON  division.id = intern_division.division_id
             GROUP BY  d_name
     ";
     return $this->db->query($query)->result_array();
   }
 
-  public function getDepartmentEmployees($d_id)
+  public function getDepartmentInterns($d_id)
   {
-    $query = "SELECT  employee_division.employee_id AS e_id,
-                      employee.name AS e_name,
-                      employee.image AS e_image,
-                      employee.hire_date AS e_hdate
-                FROM  employee_division
-          INNER JOIN  employee
-                  ON  employee_division.employee_id = employee.id
-               WHERE  employee_division.division_id = '$d_id'
+    $query = "SELECT  intern_division.intern_id AS e_id,
+                      intern.name AS e_name,
+                      intern.image AS e_image,
+                      intern.hire_date AS e_hdate
+                FROM  intern_division
+          INNER JOIN  intern
+                  ON  intern_division.intern_id = intern.id
+               WHERE  intern_division.division_id = '$d_id'
     ";
     return $this->db->query($query)->result_array();
   }
 
-  public function getEmployeeStatsbyCurrent($e_id)
+  public function getInternStatsbyCurrent($e_id)
   {
     $year = date('Y', time());
     $month = date('m', time());
@@ -65,7 +65,7 @@ class Admin_model extends CI_Model
                       in_status AS `status`,
                       lack_of AS `lack_of`
                 FROM  attendance
-                WHERE  employee_id = $e_id
+                WHERE  intern_id = $e_id
                   AND  YEAR(FROM_UNIXTIME(in_time)) = $year
                   AND  MONTH(FROM_UNIXTIME(in_time)) = $month
             ORDER BY  `date` ASC";

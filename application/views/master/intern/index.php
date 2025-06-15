@@ -6,11 +6,11 @@
 
           <div class="row">
             <div class="col-lg-3">
-              <a href="<?= base_url('master/a_employee'); ?>" class="btn btn-info btn-icon-split mb-4">
+              <a href="<?= base_url('master/a_intern'); ?>" class="btn btn-info btn-icon-split mb-4">
                 <span class="icon text-white-600">
                   <i class="fas fa-plus-circle"></i>
                 </span>
-                <span class="text">Add New Employee</span>
+                <span class="text">Add New Intern</span>
               </a>
             </div>
             <div class="col-lg-5 offset-lg-4">
@@ -18,10 +18,10 @@
             </div>
           </div>
 
-          <!-- Data Table employee-->
+          <!-- Data Table intern-->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">DataTables Employee</h6>
+              <h6 class="m-0 font-weight-bold text-primary">DataTables Intern</h6>
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -42,7 +42,7 @@
                   <tbody>
                     <?php
                     $i = 1;
-                    foreach ($employee as $emp) :
+                    foreach ($intern as $emp) :
                     ?>
 
                       <tr>
@@ -58,12 +58,12 @@
                         <td class=" align-middle"><?= $emp['birth_date']; ?></td>
                         <td class=" align-middle"><?= $emp['hire_date']; ?></td>
                         <td class="text-center align-middle">
-                          <a href="<?= base_url('master/e_employee/') . $emp['id'] ?>" class="btn btn-primary btn-circle">
+                          <a href="<?= base_url('master/e_intern/') . $emp['id'] ?>" class="btn btn-primary btn-circle">
                             <span class="icon text-white" title="Edit">
                               <i class="fas fa-edit"></i>
                             </span>
                           </a> |
-                          <a href="<?= base_url('master/d_employee/') . $emp['id'] ?>" class="btn btn-danger btn-circle" onclick="return confirm('Deleted employee will lost forever. Still want to delete?')">
+                          <a href="<?= base_url('master/d_intern/') . $emp['id'] ?>" class="btn btn-danger btn-circle" onclick="return confirm('Deleted intern will lost forever. Still want to delete?')">
                             <span class="icon text-white" title="Delete">
                               <i class="fas fa-trash-alt"></i>
                             </span>

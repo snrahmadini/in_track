@@ -12,7 +12,7 @@ class Profile extends CI_Controller
   public function index()
   {
     $data['title'] = 'My Profile';
-    $data['account'] = $this->Public_model->getAllEmployeeData($this->session->userdata['username']);
+    $data['account'] = $this->Public_model->getAllInternData($this->session->userdata['username']);
 
     $this->load->view('templates/header', $data);
     $this->load->view('templates/sidebar');

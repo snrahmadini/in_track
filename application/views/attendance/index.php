@@ -64,7 +64,7 @@
                          <?= form_close() ?>
                        <?php else : ?>
                          <h3 class="text-center my-3">THANK YOU FOR TODAY</h3>
-                         <h6 class="card-title text-center mb-4 px-4">The world of business survives less on leadership skills and more on the commitment and dedication of passionate employees like you.<br>Thank you for your hard work.</h6>
+                         <h6 class="card-title text-center mb-4 px-4">The world of business survives less on leadership skills and more on the commitment and dedication of passionate interns like you.<br>Thank you for your hard work.</h6>
                          <?php if ($disable == false) : ?>
                            <b><p class="text-center text-primary pt-3">Check Out!</p></b>
                            <div class="row">
