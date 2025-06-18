@@ -75,9 +75,9 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
+	'hostname' => '34.63.116.8',
 	'username' => 'root',
-	'password' => '',
+	'password' => 'intrack2025',
 	'database' => 'intrack',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
