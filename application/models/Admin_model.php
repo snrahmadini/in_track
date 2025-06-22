@@ -24,7 +24,13 @@ class Admin_model extends CI_Model
     $d['division'] = $this->db->get('division')->result_array();
     $d['c_division'] = $this->db->get('division')->num_rows();
     $d['users'] = $this->db->get('users')->result_array();
-    $d['c_users'] = $this->db->get('users')->num_rows();
+
+    $query_users  = "SELECT * FROM intern_division
+           LEFT JOIN users
+                  ON intern_division.intern_id = users.intern_id
+          INNER JOIN intern
+                  ON intern_division.intern_id = intern.id";
+    $d['c_users'] = $this->db->query($query_users)->num_rows();
 
     return $d;
   }

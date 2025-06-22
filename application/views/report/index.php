@@ -50,15 +50,11 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead class="bg-info text-white">
                 <tr>
-                  <th>#</th>
+                  <th>No.</th>
                   <th>Date</th>
                   <th>Name</th>
-                  <th>Check In</th>
                   <th>Notes</th>
-                  <th>Lack Of</th>
                   <th>In Status</th>
-                  <th>Check Out</th>
-                  <th>Out Status</th>
                 </tr>
               </thead>
               <tbody>
@@ -68,16 +64,12 @@
                     <th><?= $i++ ?></th>
                     <td><?= date('Y-m-d', $atd['date']) ?></td>
                     <td><?= $atd['name'] ?></td>
-                    <td><?= date('H:i:s', $atd['date']) ?></td>
                     <td><?php if ($atd['notes'] == '') {
                           echo 'Unfilled';
                         } else {
                           echo $atd['notes'];
                         }  ?></td>
-                    <td><?= $atd['lack_of']; ?></td>
                     <td><?= $atd['in_status']; ?></td>
-                    <td><?= date('H:i:s', $atd['out_time']); ?></td>
-                    <td><?= $atd['out_status']; ?></td>
                   </tr>
                 <?php endforeach; ?>
                 <a href="<?= base_url('report/print/') . $start . '/' . $end . '/' . $dept_code ?>" target="blank" class="d-none d-sm-inline-block btn btn-sm btn-danger ml-2 shadow-sm float-right"><i class="fas fa-download fa-sm text-white"></i> Generate Report</a>
