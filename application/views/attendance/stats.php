@@ -39,7 +39,6 @@
                 <th>Check In</th>
                 <th>Notes</th>
                 <th>Image</th>
-                <th>Lack Of</th>
                 <th>In Status</th>
                 <th>Check Out</th>
                 <th>Out Status</th>
@@ -84,8 +83,6 @@
                       <?php endif; ?>
                     </td>
 
-                    <!-- Column 7 (Lack Of) -->
-                    <td><?= $atd['lack_of']; ?></td>
 
 
                     <!-- Column 8 (In Status) -->

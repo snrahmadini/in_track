@@ -68,7 +68,7 @@
                     <!-- Kolom 2 (Date) -->
                     <td><?= date('l, d F Y', $atd['date']); ?></td>
 
-                    <!-- Kolom 7 (Lack Of) -->
+                    <!-- Kolom 7 (Name) -->
                     <td><?= $atd['name']; ?></td>
 
                     <!-- Kolom 5 (Notes) -->
