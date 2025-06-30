@@ -123,7 +123,6 @@ class Attendance extends CI_Controller
                         'in_time' => $iTime,
                         'notes' => $notes,
                         'image' => $image,
-                        'lack_of' => $lack,
                         'in_status' => $inStatus
                     ];
                     console_log($value);

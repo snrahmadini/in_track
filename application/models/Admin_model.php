@@ -68,8 +68,7 @@ class Admin_model extends CI_Model
     $month = date('m', time());
     $query = "SELECT  in_time AS `date`,
                       out_time AS `out_time`,
-                      in_status AS `status`,
-                      lack_of AS `lack_of`
+                      in_status AS `status`
                 FROM  attendance
                 WHERE  intern_id = $e_id
                   AND  YEAR(FROM_UNIXTIME(in_time)) = $year

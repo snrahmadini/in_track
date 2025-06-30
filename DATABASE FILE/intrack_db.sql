@@ -35,7 +35,6 @@ CREATE TABLE `attendance` (
                               `in_time` int(11) NOT NULL,
                               `notes` varchar(120) NOT NULL,
                               `image` varchar(50) NOT NULL,
-                              `lack_of` varchar(11) NOT NULL,
                               `in_status` varchar(15) NOT NULL,
                               `out_time` int(11) NOT NULL,
                               `out_status` varchar(15) NOT NULL
@@ -43,30 +42,6 @@ CREATE TABLE `attendance` (
 
 --
 -- Dumping data untuk tabel `attendance`
---
-
-INSERT INTO `attendance` (`id`, `username`, `intern_id`, `division_id`, `in_time`, `notes`, `image`, `lack_of`, `in_status`, `out_time`, `out_status`) VALUES
-                                                                                                                                                           (45, 'ADM011', 011, 'ADM', 1589178316, 'sdf', 'item-200511-8f5d7be1a1.jpg', 'None', 'Late', 1589178477, 'Early'),
-                                                                                                                                                           (48, 'ADM011', 011, 'ADM', 1589381121, '', 'item-200513-ad6953a07e.jpg', 'Notes', 'Late', 1589381127, 'Over Time'),
-                                                                                                                                                           (49, 'PCD010', 010, 'PCD', 1589384432, 'asdasd', '', 'None,image', 'Late', 1589384514, 'Over Time'),
-                                                                                                                                                           (50, 'ADM011', 011, 'ADM', 1589391038, '', '', 'Notes,image', 'On Time', 1589391056, 'Early'),
-                                                                                                                                                           (51, 'PCD010', 010, 'PCD', 1622553388, 'testing', 'item-210601-3946bb00df.png', 'None', 'Late', 1622553470, 'Over Time'),
-                                                                                                                                                           (52, 'PCD010', 010, 'PCD', 1631893356, 'none', '', 'None,image', 'Late', 1631893413, 'Over Time'),
-                                                                                                                                                           (53, 'STD026', 026, 'STD', 1631894335, 'none', '', 'None,image', 'Late', 1631894403, 'Over Time'),
-                                                                                                                                                           (54, 'ADM011', 011, 'ADM', 1631894692, 'demo', '', 'None,image', 'Late', 1631894696, 'Over Time'),
-                                                                                                                                                           (55, 'QCD027', 027, 'QCD', 1631499386, 'none..', '', 'None,image', 'Late', 1631529057, 'Early'),
-                                                                                                                                                           (56, 'QCD027', 027, 'QCD', 1631583036, 'none', '', 'None,image', 'Late', 1631611849, 'Early'),
-                                                                                                                                                           (58, 'QCD027', 027, 'QCD', 1631733350, 'none', '', 'None,image', 'Late', 1631797356, 'Early'),
-                                                                                                                                                           (59, 'QCD027', 027, 'QCD', 1631863331, 'none', '', 'None,image', 'Late', 1631896539, 'Early'),
-                                                                                                                                                           (60, 'QCD027', 027, 'QCD', 1631214919, 'none', '', 'None,image', 'Late', 1631250936, 'Over Time'),
-                                                                                                                                                           (61, 'STD026', 026, 'STD', 1631493955, 'none', '', 'None,image', 'On Time', 1631523613, 'Over Time'),
-                                                                                                                                                           (62, 'ADM011', 011, 'ADM', 1631584873, 'none', '', 'None,image', 'Late', 1631621603, 'Over Time'),
-                                                                                                                                                           (63, 'QCD027', 027, 'QCD', 1632109417, 'this is a demo note!', '', 'None,image', 'Late', 1632109437, 'Early'),
-                                                                                                                                                           (64, 'ACD002', 002, 'ACD', 1632109840, 'demo demo', '', 'None,image', 'On Time', 1632109845, 'Early'),
-                                                                                                                                                           (65, 'STD026', 026, 'STD', 1632109903, 'test', '', 'None,image', 'Late', 1632109905, 'Early'),
-                                                                                                                                                           (66, 'HRD001', 001, 'HRD', 1719284686, '', '', 'Notes,image', 'Late', 1719284692, 'Early'),
-                                                                                                                                                           (67, 'WDT029', 029, 'WDT', 1719285039, 'masuk hari pertama', '', 'None,image', 'Late', 1719285053, 'Early');
-
 -- --------------------------------------------------------
 
 --

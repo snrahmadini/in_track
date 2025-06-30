@@ -27,7 +27,6 @@ class Public_model extends CI_Model
                       intern.name AS name,
                       attendance.notes AS notes,
                       attendance.image AS image,
-                      attendance.lack_of AS lack_of,
                       attendance.in_status AS in_status,
                       attendance.out_time AS out_time,
                       attendance.out_status AS out_status,
